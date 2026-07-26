@@ -1,4 +1,4 @@
-# iidx2key
+# 2DXShim
 Software adapter for various iidxio dlls.
 Has support for keyboard/gamepad output.
 
