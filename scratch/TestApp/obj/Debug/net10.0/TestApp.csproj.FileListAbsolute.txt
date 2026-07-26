@@ -1,0 +1,17 @@
+C:\Users\papha\Documents\beatIO\scratch\TestApp\bin\Debug\net10.0\TestApp.exe
+C:\Users\papha\Documents\beatIO\scratch\TestApp\bin\Debug\net10.0\TestApp.deps.json
+C:\Users\papha\Documents\beatIO\scratch\TestApp\bin\Debug\net10.0\TestApp.runtimeconfig.json
+C:\Users\papha\Documents\beatIO\scratch\TestApp\bin\Debug\net10.0\TestApp.dll
+C:\Users\papha\Documents\beatIO\scratch\TestApp\bin\Debug\net10.0\TestApp.pdb
+C:\Users\papha\Documents\beatIO\scratch\TestApp\bin\Debug\net10.0\InputInterceptor.dll
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.csproj.AssemblyReference.cache
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.AssemblyInfoInputs.cache
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.AssemblyInfo.cs
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.csproj.CoreCompileInputs.cache
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.csproj.Up2Date
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.dll
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\refint\TestApp.dll
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.pdb
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\TestApp.genruntimeconfig.cache
+C:\Users\papha\Documents\beatIO\scratch\TestApp\obj\Debug\net10.0\ref\TestApp.dll

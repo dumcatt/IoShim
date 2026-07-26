@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8GPSp+tR2Po=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\papha\\Documents\\beatIO\\scratch\\TestApp\\TestApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\papha\\.nuget\\packages\\inputinterceptor\\2.2.1\\inputinterceptor.2.2.1.nupkg.sha512"
+  ],
+  "logs": []
+}

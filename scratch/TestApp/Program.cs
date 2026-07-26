@@ -1,0 +1,1 @@
+using System; using InputInterceptorNS; namespace Test { class Program { static void Main() { if(InputInterceptor.Initialize()) { using var hook = new KeyboardHook(KeyboardFilter.None, (ref KeyStroke s) => { }); hook.SimulateKeyDown(KeyCode.A); } } } }

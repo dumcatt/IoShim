@@ -1,0 +1,114 @@
+<Window x:Class="IidxIoGuiApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="IIDX IO GUI App" Height="600" Width="800"
+        Icon="Assets/iidxio.png"
+        Closing="Window_Closing" StateChanged="Window_StateChanged">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <TextBlock Text="Presets: " VerticalAlignment="Center" FontWeight="Bold"/>
+                <ComboBox x:Name="cmbMasterMode" Width="100" Margin="5,0,20,0" SelectionChanged="CmbMasterMode_SelectionChanged"/>
+            </StackPanel>
+            <TextBlock x:Name="txtStatus" Text="Status: Stopped" VerticalAlignment="Center" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+        </DockPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Button Mappings">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="MappingsPanel" Margin="10"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Analogs">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Turntable 1 Analog" FontWeight="Bold" Margin="0,5"/>
+                        <CheckBox x:Name="chkTT1AnalogEnabled" Content="Enabled"/>
+                        <CheckBox x:Name="chkTT1Relative" Content="Relative Mode" Margin="0,5"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Sensitivity: " VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtTT1Sens" Width="50"/>
+                            <TextBlock Text="Output: " VerticalAlignment="Center" Margin="15,0,0,0"/>
+                            <ComboBox x:Name="cmbTT1Output" Width="100"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Turntable 2 Analog" FontWeight="Bold" Margin="0,20,0,5"/>
+                        <CheckBox x:Name="chkTT2AnalogEnabled" Content="Enabled"/>
+                        <CheckBox x:Name="chkTT2Relative" Content="Relative Mode" Margin="0,5"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Sensitivity: " VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtTT2Sens" Width="50"/>
+                            <TextBlock Text="Output: " VerticalAlignment="Center" Margin="15,0,0,0"/>
+                            <ComboBox x:Name="cmbTT2Output" Width="100"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Fader Sliders (Absolute to Gamepad only)" FontWeight="Bold" Margin="0,20,0,5"/>
+                        <StackPanel x:Name="SlidersPanel" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Outputs">
+                <StackPanel Margin="10">
+                    <TextBlock Text="16-Segment Display" FontWeight="Bold" Margin="0,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Text: " VerticalAlignment="Center"/>
+                        <TextBox x:Name="txt16Seg" Width="120" Margin="0,0,20,0"/>
+                        <TextBlock Text="Speed (ms): " VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtScrollSpeed" Width="60"/>
+                    </StackPanel>
+                    
+                    <TextBlock Text="Lighting" FontWeight="Bold" Margin="0,20,0,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Top Neons: " VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbNeonMode" Width="100" Margin="0,0,20,0"/>
+                        <TextBlock Text="Cycle Interval (ms): " VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtNeonInterval" Width="60"/>
+                    </StackPanel>
+                    <CheckBox x:Name="chkReactiveLights" Content="Enable Reactive Button Lights" Margin="0,5"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="System">
+                <StackPanel Margin="10">
+                    <TextBlock Text="iidxio.dll Path" FontWeight="Bold" Margin="0,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBox x:Name="txtDllPath" Width="250" Margin="0,0,10,0"/>
+                        <Button x:Name="btnBrowse" Content="Browse..." Width="60" Click="BtnBrowse_Click"/>
+                    </StackPanel>
+                    
+                    <TextBlock Text="Startup Options" FontWeight="Bold" Margin="0,5"/>
+                    <CheckBox x:Name="chkStartWithWindows" Content="Start with Windows (Shortcut in shell:startup)" Margin="0,5" Checked="ChkStartWithWindows_Changed" Unchecked="ChkStartWithWindows_Changed"/>
+                    <CheckBox x:Name="chkStartMinimized" Content="Start Minimized" Margin="0,5"/>
+                    <CheckBox x:Name="chkMinimizeToTray" Content="Minimize to System Tray" Margin="0,5"/>
+
+                    <TextBlock Text="Input Options" FontWeight="Bold" Margin="0,20,0,5"/>
+                    <CheckBox x:Name="chkUseInterception" Margin="0,5">
+                        <CheckBox.Content>
+                            <TextBlock>
+                                Use DirectInput (Requires <Hyperlink NavigateUri="https://github.com/oblitum/Interception" RequestNavigate="Hyperlink_RequestNavigate">interception</Hyperlink>)
+                            </TextBlock>
+                        </CheckBox.Content>
+                    </CheckBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="btnResetConfig" Content="Reset Config" Width="100" Padding="5" Click="BtnResetConfig_Click"/>
+            <Button Grid.Column="2" x:Name="btnSave" Content="Save Config" Width="100" Height="30" Margin="0,0,10,0" Click="BtnSave_Click"/>
+            <Button Grid.Column="3" x:Name="btnStartStop" Content="Start" Width="100" Height="30" Click="BtnStartStop_Click" Background="#FF4CAF50" Foreground="White" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+</Window>
