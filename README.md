@@ -1,5 +1,5 @@
 # IoShim
-Software adapter for various bemanitools I/O dlls. (currently supports SDVXIO and IIDXIO)
+Software adapter for various bemanitools I/O dlls. (currently supports SDVXIO and IIDXIO)   
 Has support for keyboard/gamepad/mouse output.
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/b6f1aca1-eddc-4def-817a-bf942899f398" />
