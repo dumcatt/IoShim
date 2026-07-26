@@ -368,35 +368,48 @@ namespace IidxIoGuiApp
         private void ChkStartWithWindows_Changed(object sender, RoutedEventArgs e)
         {
             if (_isPopulating) return;
-            bool enable = chkStartWithWindows.IsChecked == true;
-            string startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-            string linkPath = System.IO.Path.Combine(startupPath, "IidxIoGuiApp.lnk");
+            UpdateStartupShortcut(chkStartWithWindows.IsChecked == true);
+        }
 
-            if (enable)
+        private void UpdateStartupShortcut(bool enable)
+        {
+            try
             {
-                try
+                string startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+                string linkPath = System.IO.Path.Combine(startupPath, "2DXShim.lnk");
+                // Remove old named shortcut if it exists
+                string oldLinkPath = System.IO.Path.Combine(startupPath, "IidxIoGuiApp.lnk");
+                if (System.IO.File.Exists(oldLinkPath))
                 {
-                    Type t = Type.GetTypeFromProgID("WScript.Shell");
-                    if (t != null)
+                    System.IO.File.Delete(oldLinkPath);
+                }
+
+                if (enable)
+                {
+                    if (!System.IO.File.Exists(linkPath))
                     {
-                        dynamic shell = Activator.CreateInstance(t);
-                        var shortcut = shell.CreateShortcut(linkPath);
-                        shortcut.TargetPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "IidxIoGuiApp.exe");
-                        shortcut.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                        shortcut.Save();
+                        Type t = Type.GetTypeFromProgID("WScript.Shell");
+                        if (t != null)
+                        {
+                            dynamic shell = Activator.CreateInstance(t);
+                            var shortcut = shell.CreateShortcut(linkPath);
+                            shortcut.TargetPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "2DXShim.exe");
+                            shortcut.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                            shortcut.Save();
+                        }
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Failed to create shortcut: " + ex.Message);
+                    if (System.IO.File.Exists(linkPath))
+                    {
+                        System.IO.File.Delete(linkPath);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (System.IO.File.Exists(linkPath))
-                {
-                    System.IO.File.Delete(linkPath);
-                }
+                MessageBox.Show("Failed to modify shortcut: " + ex.Message);
             }
         }
 

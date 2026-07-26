@@ -25,3 +25,7 @@ C:\Users\papha\Documents\beatIO\IidxIoGuiApp\bin\Debug\net10.0-windows\Assets\ii
 C:\Users\papha\Documents\beatIO\IidxIoGuiApp\bin\Debug\net10.0-windows\Assets\iidxio_active.png
 C:\Users\papha\Documents\beatIO\IidxIoGuiApp\bin\Debug\net10.0-windows\Assets\iidxio_inactive.png
 C:\Users\papha\Documents\beatIO\IidxIoGuiApp\bin\Debug\net10.0-windows\InputInterceptor.dll
+C:\Users\papha\Documents\beatIO\IidxIoGuiApp\obj\Debug\net10.0-windows\2DXShim_Content.g.cs
+C:\Users\papha\Documents\beatIO\IidxIoGuiApp\obj\Debug\net10.0-windows\2DXShim_MarkupCompile.cache
+C:\Users\papha\Documents\beatIO\IidxIoGuiApp\obj\Debug\net10.0-windows\2DXShim.g.resources
+C:\Users\papha\Documents\beatIO\IidxIoGuiApp\obj\Debug\net10.0-windows\IidxIoGuiApp.sourcelink.json

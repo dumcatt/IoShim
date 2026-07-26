@@ -1,10 +1,10 @@
-C:\Users\papha\Documents\beatIO\iidxioGUI\IidxIoGuiApp.exe
+C:\Users\papha\Documents\beatIO\iidxioGUI\2DXShim.exe
 C:\Users\papha\Documents\beatIO\iidxioGUI\Assets\iidxio.png
 C:\Users\papha\Documents\beatIO\iidxioGUI\Assets\iidxio_active.png
 C:\Users\papha\Documents\beatIO\iidxioGUI\Assets\iidxio_inactive.png
-C:\Users\papha\Documents\beatIO\iidxioGUI\IidxIoGuiApp.dll
-C:\Users\papha\Documents\beatIO\iidxioGUI\IidxIoGuiApp.deps.json
-C:\Users\papha\Documents\beatIO\iidxioGUI\IidxIoGuiApp.runtimeconfig.json
-C:\Users\papha\Documents\beatIO\iidxioGUI\IidxIoGuiApp.pdb
+C:\Users\papha\Documents\beatIO\iidxioGUI\2DXShim.dll
+C:\Users\papha\Documents\beatIO\iidxioGUI\2DXShim.deps.json
+C:\Users\papha\Documents\beatIO\iidxioGUI\2DXShim.runtimeconfig.json
+C:\Users\papha\Documents\beatIO\iidxioGUI\2DXShim.pdb
 C:\Users\papha\Documents\beatIO\iidxioGUI\InputInterceptor.dll
 C:\Users\papha\Documents\beatIO\iidxioGUI\Nefarius.ViGEm.Client.dll
