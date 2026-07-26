@@ -42,8 +42,10 @@ namespace IidxIoGuiApp
         private struct HARDWAREINPUT { public uint uMsg; public ushort wParamL; public ushort wParamH; }
 
         private const uint INPUT_KEYBOARD = 1;
+        private const uint INPUT_MOUSE = 0;
         private const uint KEYEVENTF_KEYUP = 0x0002;
         private const uint KEYEVENTF_SCANCODE = 0x0008;
+        private const uint MOUSEEVENTF_MOVE = 0x0001;
 
         private static bool _interceptionInitialized = false;
         private static KeyboardHook _hook = null;
@@ -139,6 +141,25 @@ namespace IidxIoGuiApp
                 return (ushort)char.ToUpper(keyName[0]);
             }
             return 0;
+        }
+
+        public static void MoveMouse(int dx, int dy)
+        {
+            var inputs = new INPUT[1];
+            inputs[0] = new INPUT
+            {
+                type = INPUT_MOUSE,
+                U = new InputUnion
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dx = dx,
+                        dy = dy,
+                        dwFlags = MOUSEEVENTF_MOVE
+                    }
+                }
+            };
+            SendInput(1, inputs, Marshal.SizeOf(typeof(INPUT)));
         }
     }
 }

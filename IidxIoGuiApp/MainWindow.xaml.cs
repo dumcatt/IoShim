@@ -82,6 +82,11 @@ namespace IidxIoGuiApp
                     this.Hide();
                 }
             }
+
+            if (_settings.StartEnabled)
+            {
+                BtnStartStop_Click(this, new RoutedEventArgs());
+            }
         }
 
         private void ShowWindow()
@@ -117,7 +122,6 @@ namespace IidxIoGuiApp
         {
             _isPopulating = true;
             
-            PopulateCmbOutputs(cmbTT1Output);
             cmbMasterMode.ItemsSource = Enum.GetValues(typeof(MasterMode));
             cmbNeonMode.ItemsSource = Enum.GetValues(typeof(NeonMode));
 
@@ -127,18 +131,25 @@ namespace IidxIoGuiApp
             txt16Seg.Text = _settings.Text16Seg;
             txtScrollSpeed.Text = _settings.ScrollSpeedMs.ToString();
 
+            cmbTT1Axis.ItemsSource = Enum.GetValues(typeof(AnalogAxis));
+            cmbTT2Axis.ItemsSource = Enum.GetValues(typeof(AnalogAxis));
+
             // Turntable Analog
             chkTT1AnalogEnabled.IsChecked = _settings.TT1Analog.Enabled;
             chkTT1Relative.IsChecked = _settings.TT1Analog.Relative;
             txtTT1Sens.Text = _settings.TT1Analog.Sensitivity.ToString();
+            txtTT1Deadzone.Text = _settings.TT1Analog.Deadzone.ToString();
             PopulateCmbOutputs(cmbTT1Output);
             cmbTT1Output.SelectedItem = _settings.TT1Analog.OutputType;
+            cmbTT1Axis.SelectedItem = _settings.TT1Analog.Axis;
 
             chkTT2AnalogEnabled.IsChecked = _settings.TT2Analog.Enabled;
             chkTT2Relative.IsChecked = _settings.TT2Analog.Relative;
             txtTT2Sens.Text = _settings.TT2Analog.Sensitivity.ToString();
+            txtTT2Deadzone.Text = _settings.TT2Analog.Deadzone.ToString();
             PopulateCmbOutputs(cmbTT2Output);
             cmbTT2Output.SelectedItem = _settings.TT2Analog.OutputType;
+            cmbTT2Axis.SelectedItem = _settings.TT2Analog.Axis;
 
             cmbNeonMode.SelectedItem = _settings.NeonMode;
             txtNeonInterval.Text = _settings.NeonCycleIntervalMs.ToString();
@@ -147,6 +158,7 @@ namespace IidxIoGuiApp
             chkStartWithWindows.IsChecked = _settings.StartWithWindows;
             chkStartMinimized.IsChecked = _settings.StartMinimized;
             chkMinimizeToTray.IsChecked = _settings.MinimizeToTray;
+            chkStartEnabled.IsChecked = _settings.StartEnabled;
             chkUseInterception.IsChecked = _settings.UseInterception;
 
             // Generate rows
@@ -284,6 +296,7 @@ namespace IidxIoGuiApp
 
         private void PopulateCmbOutputs(ComboBox cmb)
         {
+            cmb.Items.Clear();
             foreach (OutputType ot in Enum.GetValues(typeof(OutputType)))
             {
                 cmb.Items.Add(ot);
@@ -299,12 +312,16 @@ namespace IidxIoGuiApp
             _settings.TT1Analog.Enabled = chkTT1AnalogEnabled.IsChecked == true;
             _settings.TT1Analog.Relative = chkTT1Relative.IsChecked == true;
             if (short.TryParse(txtTT1Sens.Text, out short s1)) _settings.TT1Analog.Sensitivity = s1;
+            if (int.TryParse(txtTT1Deadzone.Text, out int d1)) _settings.TT1Analog.Deadzone = d1;
             if (cmbTT1Output.SelectedItem is OutputType ot1) _settings.TT1Analog.OutputType = ot1;
+            if (cmbTT1Axis.SelectedItem is AnalogAxis ax1) _settings.TT1Analog.Axis = ax1;
 
             _settings.TT2Analog.Enabled = chkTT2AnalogEnabled.IsChecked == true;
             _settings.TT2Analog.Relative = chkTT2Relative.IsChecked == true;
             if (short.TryParse(txtTT2Sens.Text, out short s2)) _settings.TT2Analog.Sensitivity = s2;
+            if (int.TryParse(txtTT2Deadzone.Text, out int d2)) _settings.TT2Analog.Deadzone = d2;
             if (cmbTT2Output.SelectedItem is OutputType ot2) _settings.TT2Analog.OutputType = ot2;
+            if (cmbTT2Axis.SelectedItem is AnalogAxis ax2) _settings.TT2Analog.Axis = ax2;
 
             foreach (var row in _rows)
             {
@@ -339,6 +356,7 @@ namespace IidxIoGuiApp
             _settings.StartWithWindows = chkStartWithWindows.IsChecked == true;
             _settings.StartMinimized = chkStartMinimized.IsChecked == true;
             _settings.MinimizeToTray = chkMinimizeToTray.IsChecked == true;
+            _settings.StartEnabled = chkStartEnabled.IsChecked == true;
             _settings.UseInterception = chkUseInterception.IsChecked == true;
 
             _settings.Save(_settingsPath);

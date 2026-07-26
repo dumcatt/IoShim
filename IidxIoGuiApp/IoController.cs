@@ -26,7 +26,8 @@ namespace IidxIoGuiApp
         // Turntable state
         private byte[] _lastTtRaw = new byte[2];
         private int[] _ttStateBtn = new int[2];
-        private int[] _ttStateAnalog = new int[2];
+        private int[] _deadzoneAcc = new int[2];
+        private int[] _absSpinnerPos = new int[2];
 
         // Keep track of which keys are currently pressed so we can release them properly
         private HashSet<(ushort vk, string name)> _pressedKeys = new HashSet<(ushort vk, string name)>();
@@ -372,6 +373,18 @@ namespace IidxIoGuiApp
             }
         }
 
+        private Xbox360Axis GetAxisFromEnum(AnalogAxis axis)
+        {
+            switch (axis)
+            {
+                case AnalogAxis.X: return Xbox360Axis.LeftThumbX;
+                case AnalogAxis.Y: return Xbox360Axis.LeftThumbY;
+                case AnalogAxis.RX: return Xbox360Axis.RightThumbX;
+                case AnalogAxis.RY: return Xbox360Axis.RightThumbY;
+                default: return Xbox360Axis.LeftThumbX;
+            }
+        }
+
         private void HandleTurntable(int idx, byte raw, IXbox360Controller r1, IXbox360Controller r2, IXbox360Controller r3, IidxInput incInput, IidxInput decInput, TtAnalogMapping analogMap)
         {
             // Simple button translation for Turntable like vigem-iidxio
@@ -402,28 +415,46 @@ namespace IidxIoGuiApp
             // Analog translation
             if (analogMap.Enabled && analogMap.OutputType != OutputType.None)
             {
-                short axisVal = 0;
-                if (analogMap.Relative)
+                int dz = analogMap.Deadzone;
+                _deadzoneAcc[idx] += delta;
+                
+                int dR = 0;
+                if (_deadzoneAcc[idx] > dz)
                 {
-                    int ast = _ttStateAnalog[idx];
-                    if (delta == 0) ast /= 2;
-                    else
-                    {
-                        ast += delta * analogMap.Sensitivity;
-                        if (ast > short.MaxValue) ast = short.MaxValue;
-                        if (ast < short.MinValue) ast = short.MinValue;
-                    }
-                    _ttStateAnalog[idx] = ast;
-                    axisVal = (short)ast;
+                    dR = _deadzoneAcc[idx] - dz;
+                    _deadzoneAcc[idx] = dz;
                 }
-                else
+                else if (_deadzoneAcc[idx] < -dz)
                 {
-                    axisVal = (short)((raw * 256) - 32768); // Map 0-255 to short
+                    dR = _deadzoneAcc[idx] + dz;
+                    _deadzoneAcc[idx] = -dz;
                 }
 
-                if (analogMap.OutputType == OutputType.XboxPad1) r1.SetAxisValue(Xbox360Axis.LeftThumbX, axisVal);
-                else if (analogMap.OutputType == OutputType.XboxPad2) r2.SetAxisValue(Xbox360Axis.LeftThumbX, axisVal);
-                else if (analogMap.OutputType == OutputType.XboxPad3) r3.SetAxisValue(Xbox360Axis.LeftThumbX, axisVal);
+                if (analogMap.OutputType == OutputType.Mouse)
+                {
+                    int dx = analogMap.Axis == AnalogAxis.X ? dR * analogMap.Sensitivity / 100 : 0;
+                    int dy = analogMap.Axis == AnalogAxis.Y ? dR * analogMap.Sensitivity / 100 : 0;
+                    if (dx != 0 || dy != 0) KeyboardHelper.MoveMouse(dx, dy);
+                }
+                else if (analogMap.OutputType != OutputType.Keyboard)
+                {
+                    short axisVal = 0;
+                    if (analogMap.Relative)
+                    {
+                        axisVal = (short)Math.Clamp(dR * analogMap.Sensitivity, short.MinValue, short.MaxValue);
+                    }
+                    else
+                    {
+                        _absSpinnerPos[idx] += dR * analogMap.Sensitivity;
+                        if (_absSpinnerPos[idx] > short.MaxValue) _absSpinnerPos[idx] -= 65536;
+                        else if (_absSpinnerPos[idx] < short.MinValue) _absSpinnerPos[idx] += 65536;
+                        axisVal = (short)_absSpinnerPos[idx];
+                    }
+
+                    if (analogMap.OutputType == OutputType.XboxPad1) r1?.SetAxisValue(GetAxisFromEnum(analogMap.Axis), axisVal);
+                    else if (analogMap.OutputType == OutputType.XboxPad2) r2?.SetAxisValue(GetAxisFromEnum(analogMap.Axis), axisVal);
+                    else if (analogMap.OutputType == OutputType.XboxPad3) r3?.SetAxisValue(GetAxisFromEnum(analogMap.Axis), axisVal);
+                }
             }
         }
     }

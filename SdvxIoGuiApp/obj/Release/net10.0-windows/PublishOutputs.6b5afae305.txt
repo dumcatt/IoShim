@@ -1,0 +1,10 @@
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\KFCShim.exe
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\Assets\iidxio.png
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\Assets\iidxio_active.png
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\Assets\iidxio_inactive.png
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\KFCShim.dll
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\KFCShim.deps.json
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\KFCShim.runtimeconfig.json
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\KFCShim.pdb
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\InputInterceptor.dll
+c:\Users\papha\Documents\beatIO\SdvxIoGuiApp\bin\Release\net10.0-windows\publish\Nefarius.ViGEm.Client.dll

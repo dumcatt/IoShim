@@ -10,10 +10,19 @@ namespace IidxIoGuiApp
     {
         None,
         Keyboard,
+        Mouse,
         XboxPad1,
         XboxPad2,
         XboxPad3,
         XboxPad4
+    }
+
+    public enum AnalogAxis
+    {
+        X,
+        Y,
+        RX,
+        RY
     }
 
     public enum MasterMode
@@ -54,9 +63,11 @@ namespace IidxIoGuiApp
     public class TtAnalogMapping
     {
         public bool Enabled { get; set; } = false;
-        public OutputType OutputType { get; set; } = OutputType.XboxPad1; // e.g. XboxPad1 ThumbLX
+        public OutputType OutputType { get; set; } = OutputType.XboxPad1;
+        public AnalogAxis Axis { get; set; } = AnalogAxis.X;
         public bool Relative { get; set; } = true;
         public short Sensitivity { get; set; } = 400;
+        public int Deadzone { get; set; } = 10;
     }
 
     public class SliderMapping
@@ -97,7 +108,8 @@ namespace IidxIoGuiApp
         // System Settings
         public bool StartWithWindows { get; set; } = false;
         public bool StartMinimized { get; set; } = false;
-        public bool MinimizeToTray { get; set; } = true;
+        public bool MinimizeToTray { get; set; } = false;
+        public bool StartEnabled { get; set; } = false;
         public bool UseInterception { get; set; } = false;
 
         public static AppSettings Load(string path)

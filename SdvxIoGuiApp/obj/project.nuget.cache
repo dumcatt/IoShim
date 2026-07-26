@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "af8mn7DNRCM=",
+  "success": true,
+  "projectFilePath": "c:\\Users\\papha\\Documents\\beatIO\\SdvxIoGuiApp\\KFCShim.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\papha\\.nuget\\packages\\inputinterceptor\\2.2.1\\inputinterceptor.2.2.1.nupkg.sha512",
+    "C:\\Users\\papha\\.nuget\\packages\\nefarius.vigem.client\\1.21.256\\nefarius.vigem.client.1.21.256.nupkg.sha512"
+  ],
+  "logs": []
+}

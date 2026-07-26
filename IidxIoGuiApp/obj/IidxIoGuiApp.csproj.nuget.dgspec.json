@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj": {}
+    "c:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj": {
+    "c:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj",
+        "projectUniqueName": "c:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj",
         "projectName": "2DXShim",
-        "projectPath": "C:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj",
+        "projectPath": "c:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\IidxIoGuiApp.csproj",
         "packagesPath": "C:\\Users\\papha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\obj\\",
+        "outputPath": "c:\\Users\\papha\\Documents\\beatIO\\IidxIoGuiApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\papha\\AppData\\Roaming\\NuGet\\NuGet.Config"

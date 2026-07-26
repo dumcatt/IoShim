@@ -28,25 +28,46 @@
             <TabItem Header="Analogs">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="10">
-                        <TextBlock Text="Turntable 1 Analog" FontWeight="Bold" Margin="0,5"/>
-                        <CheckBox x:Name="chkTT1AnalogEnabled" Content="Enabled"/>
-                        <CheckBox x:Name="chkTT1Relative" Content="Relative Mode" Margin="0,5"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                            <TextBlock Text="Sensitivity: " VerticalAlignment="Center"/>
-                            <TextBox x:Name="txtTT1Sens" Width="50"/>
-                            <TextBlock Text="Output: " VerticalAlignment="Center" Margin="15,0,0,0"/>
-                            <ComboBox x:Name="cmbTT1Output" Width="100"/>
-                        </StackPanel>
-
-                        <TextBlock Text="Turntable 2 Analog" FontWeight="Bold" Margin="0,20,0,5"/>
-                        <CheckBox x:Name="chkTT2AnalogEnabled" Content="Enabled"/>
-                        <CheckBox x:Name="chkTT2Relative" Content="Relative Mode" Margin="0,5"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                            <TextBlock Text="Sensitivity: " VerticalAlignment="Center"/>
-                            <TextBox x:Name="txtTT2Sens" Width="50"/>
-                            <TextBlock Text="Output: " VerticalAlignment="Center" Margin="15,0,0,0"/>
-                            <ComboBox x:Name="cmbTT2Output" Width="100"/>
-                        </StackPanel>
+                        <TextBlock Text="Turntable Analog" FontWeight="Bold" Margin="0,5"/>
+                        <Grid Margin="0,5,0,20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="65"/>
+                                <ColumnDefinition Width="65"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Headers -->
+                            <TextBlock Text="Spinner" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Output Type" FontWeight="Bold" Grid.Column="1"/>
+                            <TextBlock Text="Axis" FontWeight="Bold" Grid.Column="2"/>
+                            <TextBlock Text="Options" FontWeight="Bold" Grid.Column="3"/>
+                            <TextBlock Text="Sensitivity" FontWeight="Bold" Grid.Column="4"/>
+                            <TextBlock Text="Deadzone" FontWeight="Bold" Grid.Column="5"/>
+                            
+                            <!-- TT1 -->
+                            <CheckBox x:Name="chkTT1AnalogEnabled" Content="TT1" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                            <ComboBox x:Name="cmbTT1Output" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <ComboBox x:Name="cmbTT1Axis" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <CheckBox x:Name="chkTT1Relative" Content="Relative" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <TextBox x:Name="txtTT1Sens" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <TextBox x:Name="txtTT1Deadzone" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                            
+                            <!-- TT2 -->
+                            <CheckBox x:Name="chkTT2AnalogEnabled" Content="TT2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                            <ComboBox x:Name="cmbTT2Output" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <ComboBox x:Name="cmbTT2Axis" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <CheckBox x:Name="chkTT2Relative" Content="Relative" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <TextBox x:Name="txtTT2Sens" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                            <TextBox x:Name="txtTT2Deadzone" Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                        </Grid>
 
                         <TextBlock Text="Fader Sliders (Absolute to Gamepad only)" FontWeight="Bold" Margin="0,20,0,5"/>
                         <StackPanel x:Name="SlidersPanel" />
@@ -85,6 +106,7 @@
                     <CheckBox x:Name="chkStartWithWindows" Content="Start with Windows (Shortcut in shell:startup)" Margin="0,5" Checked="ChkStartWithWindows_Changed" Unchecked="ChkStartWithWindows_Changed"/>
                     <CheckBox x:Name="chkStartMinimized" Content="Start Minimized" Margin="0,5"/>
                     <CheckBox x:Name="chkMinimizeToTray" Content="Minimize to System Tray" Margin="0,5"/>
+                    <CheckBox x:Name="chkStartEnabled" Content="Start Conversion Automatically" Margin="0,5"/>
 
                     <TextBlock Text="Input Options" FontWeight="Bold" Margin="0,20,0,5"/>
                     <CheckBox x:Name="chkUseInterception" Margin="0,5">

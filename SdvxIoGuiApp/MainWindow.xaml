@@ -1,0 +1,139 @@
+<Window x:Class="SdvxIoGuiApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KFCShim" Height="650" Width="800"
+        Icon="Assets/iidxio.png"
+        Closing="Window_Closing" StateChanged="Window_StateChanged">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <TextBlock Text="Presets: " VerticalAlignment="Center" FontWeight="Bold"/>
+                <ComboBox x:Name="cmbMasterMode" Width="100" Margin="5,0,20,0" SelectionChanged="CmbMasterMode_SelectionChanged"/>
+            </StackPanel>
+            <TextBlock x:Name="txtStatus" Text="Status: Stopped" VerticalAlignment="Center" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+        </DockPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Button Mappings">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="MappingsPanel" Margin="10"/>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="Analogs">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="65"/>
+                            <ColumnDefinition Width="65"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Headers -->
+                        <TextBlock Text="Spinner" FontWeight="Bold" Grid.Column="0"/>
+                        <TextBlock Text="Output Type" FontWeight="Bold" Grid.Column="1"/>
+                        <TextBlock Text="Axis" FontWeight="Bold" Grid.Column="2"/>
+                        <TextBlock Text="Options" FontWeight="Bold" Grid.Column="3"/>
+                        <TextBlock Text="Sensitivity" FontWeight="Bold" Grid.Column="4"/>
+                        <TextBlock Text="Deadzone" FontWeight="Bold" Grid.Column="5"/>
+                        
+                        <!-- VOL-L -->
+                        <CheckBox x:Name="chkVolL" Content="VOL-L" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cmbVolLOut" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <ComboBox x:Name="cmbVolLAxis" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <CheckBox x:Name="chkVolLRelative" Content="Relative" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <TextBox x:Name="txtVolLSens" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <TextBox x:Name="txtVolLDeadzone" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                        
+                        <!-- VOL-R -->
+                        <CheckBox x:Name="chkVolR" Content="VOL-R" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cmbVolROut" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <ComboBox x:Name="cmbVolRAxis" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <CheckBox x:Name="chkVolRRelative" Content="Relative" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <TextBox x:Name="txtVolRSens" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                        <TextBox x:Name="txtVolRDeadzone" Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" Margin="0,10,0,0"/>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="Outputs">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Button LEDs" FontWeight="Bold" Margin="0,5"/>
+                        <CheckBox x:Name="chkEnableButtonLights" Content="Enable Reactive Button Lights" Margin="0,5"/>
+                        
+                        <TextBlock Text="Amplifiers (0 = Max, 96 = Min)" FontWeight="Bold" Margin="0,20,0,5"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Primary: " VerticalAlignment="Center" Width="70"/>
+                            <Slider x:Name="slPrimaryVol" Width="80" Minimum="0" Maximum="96" IsSnapToTickEnabled="True" TickFrequency="1" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding Value, ElementName=slPrimaryVol, UpdateSourceTrigger=PropertyChanged}" Width="25" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            
+                            <TextBlock Text="Headphone: " VerticalAlignment="Center" Margin="15,0,0,0" Width="75"/>
+                            <Slider x:Name="slHeadphoneVol" Width="80" Minimum="0" Maximum="96" IsSnapToTickEnabled="True" TickFrequency="1" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding Value, ElementName=slHeadphoneVol, UpdateSourceTrigger=PropertyChanged}" Width="25" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            
+                            <TextBlock Text="Subwoofer: " VerticalAlignment="Center" Margin="15,0,0,0" Width="70"/>
+                            <Slider x:Name="slSubwooferVol" Width="80" Minimum="0" Maximum="96" IsSnapToTickEnabled="True" TickFrequency="1" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding Value, ElementName=slSubwooferVol, UpdateSourceTrigger=PropertyChanged}" Width="25" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Text="RGB Lights" FontWeight="Bold" Margin="0,20,0,5"/>
+                        <StackPanel x:Name="RgbPanel"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="System">
+                <StackPanel Margin="10">
+                    <TextBlock Text="sdvxio.dll Path" FontWeight="Bold" Margin="0,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBox x:Name="txtDllPath" Width="250" Margin="0,0,10,0"/>
+                        <Button x:Name="btnBrowse" Content="Browse..." Width="60" Click="BtnBrowse_Click"/>
+                    </StackPanel>
+                    
+                    <TextBlock Text="Startup Options" FontWeight="Bold" Margin="0,5"/>
+                    <CheckBox x:Name="chkStartWithWindows" Content="Start with Windows (Shortcut in shell:startup)" Margin="0,5" Checked="ChkStartWithWindows_Changed" Unchecked="ChkStartWithWindows_Changed"/>
+                    <CheckBox x:Name="chkStartMinimized" Content="Start Minimized" Margin="0,5"/>
+                    <CheckBox x:Name="chkMinimizeToTray" Content="Minimize to System Tray" Margin="0,5"/>
+                    <CheckBox x:Name="chkStartEnabled" Content="Start Conversion Automatically" Margin="0,5"/>
+
+                    <TextBlock Text="Input Options" FontWeight="Bold" Margin="0,20,0,5"/>
+                    <CheckBox x:Name="chkUseInterception" Margin="0,5">
+                        <CheckBox.Content>
+                            <TextBlock>
+                                Use DirectInput (Requires <Hyperlink NavigateUri="https://github.com/oblitum/Interception" RequestNavigate="Hyperlink_RequestNavigate">interception</Hyperlink>)
+                            </TextBlock>
+                        </CheckBox.Content>
+                    </CheckBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="btnResetConfig" Content="Reset Config" Width="100" Padding="5" Click="BtnResetConfig_Click"/>
+            <Button Grid.Column="2" x:Name="btnSave" Content="Save Config" Width="100" Height="30" Margin="0,0,10,0" Click="BtnSave_Click"/>
+            <Button Grid.Column="3" x:Name="btnStartStop" Content="Start" Width="100" Height="30" Click="BtnStartStop_Click" Background="#FF4CAF50" Foreground="White" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+</Window>
